@@ -1,3 +1,30 @@
+# ============================================================
+# CS 6220 course-specific rules
+# ============================================================
+
+# Local virtual environment (shared by all assignments, created in repo root)
+.venv/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# macOS metadata
+.DS_Store
+
+# PDFs: reports are submitted on Gradescope; handouts are not committed
+*.pdf
+
+# Assignment data: ignored by default. Large datasets are shared via OneDrive.
+# Small files needed to run a notebook are committed. Each one needs its own
+# "!" exception line below.
+hw*/data/*
+!hw1/data/iris.data
+!hw1/data/iris.names
+
+# ============================================================
+# Standard Python template (github/gitignore)
+# ============================================================
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
