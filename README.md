@@ -14,15 +14,18 @@ CS-6220-Assigment/
 ├── requirements.txt     # Pinned Python dependencies shared by all assignments
 ├── .gitignore
 ├── .venv/               # Local virtual environment (git-ignored, created during setup)
-└── hw1/
-    ├── homework_1.ipynb # HW1 notebook
-    └── data/
-        ├── iris.data    # UCI Iris dataset (CSV, no header row)
-        └── iris.names   # Dataset description
+├── hw1/
+│   ├── homework_1.ipynb # HW1 notebook
+│   └── data/
+│       ├── iris.data    # UCI Iris dataset (CSV, no header row)
+│       └── iris.names   # Dataset description
+└── hw2/
+    ├── homework_2.ipynb   # HW2 implementation (synthetic data, no data/ folder)
+    └── report_plots.ipynb # HW2 report experiments: plots and result tables
 ```
 
-Each assignment has its own `hwN/` folder with a notebook and a `data/` subfolder. New
-assignments follow the same pattern (`hw2/`, `hw3/`, …).
+Each assignment has its own `hwN/` folder with a notebook, plus a `data/` subfolder when it
+uses external data. New assignments follow the same pattern (`hw3/`, `hw4/`, …).
 
 ---
 
@@ -88,6 +91,30 @@ Notebook outputs are committed on purpose, so results can be read directly on Gi
 
 **Data:** UCI Iris dataset in `hw1/data/iris.data`. The file has no header row. The notebook
 names the columns and calls the label column `species`.
+
+### HW2 — Linear Regression and Regression Trees from Scratch
+
+**Folder:** [`hw2/`](hw2/) · **Notebooks:** [`hw2/homework_2.ipynb`](hw2/homework_2.ipynb) (implementation),
+[`hw2/report_plots.ipynb`](hw2/report_plots.ipynb) (report experiments)
+
+- **Part 1 — Data generator:** `generate_noisy_dataset` samples x uniformly from a range, adds
+  feature columns `f_1(x), …, f_d(x)`, and sets `y = f(x) + noise` with noise drawn uniformly
+  from `[-ε, ε]`. `split_dataset` makes a fixed 80/20 train/test split (`random_state=42`).
+- **Part 2 — Linear regression:** `fit` computes β = (XᵀX)⁻¹XᵀY with NumPy (including the
+  intercept column), `predict` computes β · x, and `evaluate_model` returns the RMSE. No
+  regression library is used.
+- **Part 3 — Regression tree:** `RegressionTree` builds the tree with recursive binary splits.
+  It tries midpoint split points on every attribute, picks the split with the lowest total
+  child SSE, and stops at nodes with fewer than `min_records` records. Leaves predict the mean
+  y. `visualize()` plots the data, split points, and the tree's piecewise prediction. No tree
+  library is used.
+- **Report experiments:** `report_plots.ipynb` loads the implementation with `%run homework_2.ipynb`
+  and runs every report experiment. It covers linear models on `(x, y)` and `(x, x², x³, y)`
+  data, extrapolation error at x = 10, irreducible error (ε/√3), RMSE vs. number of monomial
+  columns, trees with `min_records` ∈ {1000, 50, 1}, a tree vs. linear comparison, and a
+  `sin(2πx)` overfitting study.
+
+**Data:** synthetic, generated in the notebooks, so there is no `data/` folder.
 
 <!-- Template for new assignments:
 ### HWN — Title

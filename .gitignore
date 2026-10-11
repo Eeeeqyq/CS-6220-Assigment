@@ -243,3 +243,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Personal report drafts (pseudocode notebooks), kept local only
+hw*/pseudocode.ipynb
